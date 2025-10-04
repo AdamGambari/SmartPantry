@@ -6,13 +6,13 @@ import { Camera, Upload, X, Check } from 'lucide-react'
 interface ReceiptScannerProps {
   isOpen: boolean
   onClose: () => void
-  onItemsExtracted: (items: any[]) => void
+  onItemsExtracted: (items: Array<{ name: string; quantity: number; unit: string; price: number }>) => void
 }
 
 export default function ReceiptScanner({ isOpen, onClose, onItemsExtracted }: ReceiptScannerProps) {
   const [isScanning, setIsScanning] = useState(false)
   const [preview, setPreview] = useState<string | null>(null)
-  const [extractedItems, setExtractedItems] = useState<any[]>([])
+  const [extractedItems, setExtractedItems] = useState<Array<{ name: string; quantity: number; unit: string; price: number }>>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -64,7 +64,7 @@ export default function ReceiptScanner({ isOpen, onClose, onItemsExtracted }: Re
     }
   }
 
-  const processReceipt = async (imageData: string) => {
+  const processReceipt = async (_imageData: string) => {
     setIsProcessing(true)
     
     // mock OCR processing

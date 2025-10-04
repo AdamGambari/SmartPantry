@@ -55,30 +55,40 @@ export default function Home() {
           '🍎', '🥕', '🍞', '🥛', '🧀', '🍌', '🥚', '🍇', '🥑', '🍓', 
           '🍊', '🥬', '🍗', '🐟', '🥜', '🍅', '🌽', '🥒', '🍋', '🍒',
           '🥖', '🥨', '🧈', '🍯', '🥔', '🍄', '🌶️', '🥥', '🍑', '🍈'
-        ].map((emoji, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-4xl select-none"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -50, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              rotate: [0, Math.random() * 360, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut"
-            }}
-          >
-            {emoji}
-          </motion.div>
-        ))}
+        ].map((emoji, i) => {
+          // Use deterministic positions based on index to avoid hydration mismatch
+          const positions = [
+            [15, 12], [53, 40], [37, 86], [77, 70], [98, 37], [33, 87], [38, 23], [33, 74], [69, 45], [1, 24],
+            [44, 24], [51, 60], [65, 61], [84, 33], [60, 22], [90, 93], [61, 66], [30, 50], [40, 88], [86, 51],
+            [29, 79], [87, 61], [24, 5], [31, 24], [30, 44], [68, 41], [86, 6], [91, 40], [68, 83], [73, 33]
+          ];
+          const [left, top] = positions[i] || [50, 50];
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute text-4xl select-none"
+              style={{
+                left: `${left}%`,
+                top: `${top}%`,
+              }}
+              animate={{
+                y: [0, -50, 0],
+                x: [0, (i % 2) * 10 - 5, 0],
+                rotate: [0, i * 36, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 4 + (i % 3),
+                repeat: Infinity,
+                delay: i * 0.1,
+                ease: "easeInOut"
+              }}
+            >
+              {emoji}
+            </motion.div>
+          );
+        })}
         
         {/* Floating Food Icons */}
         <motion.div

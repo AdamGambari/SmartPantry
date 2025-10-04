@@ -50,7 +50,7 @@ export class MockPantryService {
     }
   ]
 
-  static async getPantryItems(householdId: string): Promise<PantryItem[]> {
+  static async getPantryItems(_householdId: string): Promise<PantryItem[]> {
     // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500))
     return this.mockItems
@@ -93,7 +93,7 @@ export class MockPantryService {
     this.mockItems = this.mockItems.filter(item => item.id !== id)
   }
 
-  static async getExpiringItems(householdId: string): Promise<PantryItem[]> {
+  static async getExpiringItems(_householdId: string): Promise<PantryItem[]> {
     await new Promise(resolve => setTimeout(resolve, 300))
     const sevenDaysFromNow = new Date()
     sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7)
@@ -103,7 +103,7 @@ export class MockPantryService {
     )
   }
 
-  static async getExpiredItems(householdId: string): Promise<PantryItem[]> {
+  static async getExpiredItems(_householdId: string): Promise<PantryItem[]> {
     await new Promise(resolve => setTimeout(resolve, 300))
     const now = new Date()
     

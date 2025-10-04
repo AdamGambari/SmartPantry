@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Bell, AlertTriangle, Clock, Lightbulb, ShoppingCart } from 'lucide-react'
+import { Bell, Clock, Lightbulb, ShoppingCart } from 'lucide-react'
 import { SmartAlert } from '@/lib/aiFeatures'
 
 interface SmartAlertsProps {

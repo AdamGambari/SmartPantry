@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { TrendingUp, Heart, Leaf, Target } from 'lucide-react'
+import { Target } from 'lucide-react'
 
 interface AIAnalyticsProps {
   healthScore: number
@@ -91,7 +91,7 @@ export default function AIAnalytics({ healthScore, categories, totalValue, expir
             </div>
           </div>
           
-          {Object.entries(categories).some(([_, count]) => count === 0) && (
+          {Object.entries(categories).some(([, count]) => count === 0) && (
             <div className="flex items-start gap-4 p-4 bg-orange-50 border-2 border-orange-200 rounded-xl">
               <div className="p-2 bg-orange-500 rounded-lg">
                 <Target className="w-5 h-5 text-white" />

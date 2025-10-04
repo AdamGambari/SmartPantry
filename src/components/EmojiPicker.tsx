@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { foodEmojis, categories, FoodEmoji } from '@/data/foodEmojis'
+import { foodEmojis, categories } from '@/data/foodEmojis'
 
 interface EmojiPickerProps {
   onSelect: (emoji: string, name: string) => void;

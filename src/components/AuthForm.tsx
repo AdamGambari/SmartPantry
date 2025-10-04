@@ -68,7 +68,7 @@ export default function AuthForm() {
           setMessage('Account created! Signing you in...')
           
           // Try to sign in immediately
-          const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+                    const { error: signInError } = await supabase.auth.signInWithPassword({
             email,
             password,
           })
@@ -86,8 +86,8 @@ export default function AuthForm() {
           }
         }
       }
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred')
+    } catch (err) {
+      setError((err as Error).message || 'An unexpected error occurred')
     } finally {
       setLoading(false)
     }

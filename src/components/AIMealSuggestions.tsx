@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChefHat, Clock, Users, ShoppingCart, Star } from 'lucide-react'
+import { ChefHat, Clock, Users, Star } from 'lucide-react'
 import { MealSuggestion } from '@/lib/aiFeatures'
 
 interface AIMealSuggestionsProps {
