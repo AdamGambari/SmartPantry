@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
-import { Plus, Package, DollarSign, AlertTriangle, Calendar, Brain, ShoppingCart } from 'lucide-react'
+import { Package, DollarSign, AlertTriangle, Calendar, Brain } from 'lucide-react'
 import FoodIcon from '@/components/FoodIcon'
 import AIMealSuggestions from '@/components/AIMealSuggestions'
 import SmartAlerts from '@/components/SmartAlerts'
@@ -21,7 +21,7 @@ interface PantryItem {
 }
 
 export default function Dashboard() {
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [loading, setLoading] = useState(true)
   const [pantryItems, setPantryItems] = useState<PantryItem[]>([])
   const [showAddForm, setShowAddForm] = useState(false)
@@ -359,7 +359,7 @@ export default function Dashboard() {
                   <Package className="w-10 h-10 text-white" />
                 </div>
                 <p className="text-gray-700 text-lg font-medium">🍽️ No items in your pantry yet</p>
-                <p className="text-gray-600 font-medium">Click "➕ Add Item" to get started</p>
+                <p className="text-gray-600 font-medium">Click &quot;➕ Add Item&quot; to get started</p>
               </div>
             ) : (
               <div className="divide-y divide-blue-200">

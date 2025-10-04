@@ -7,7 +7,7 @@ import { Package, DollarSign, AlertTriangle, Users, ArrowRight, CheckCircle } fr
 import Navbar from '@/components/Navbar'
 
 export default function Home() {
-  const [showPreview, setShowPreview] = useState(true)
+  const [showPreview] = useState(true)
 
   // Mock data for marketing homepage
   const mockStats = {
@@ -407,7 +407,7 @@ export default function Home() {
                 SEE IT IN ACTION
               </h2>
               <p className="text-xl text-gray-300 font-medium">
-                Here's how your pantry will look with Smart Pantry
+                Here&apos;s how your pantry will look with Smart Pantry
               </p>
             </motion.div>
 
@@ -521,7 +521,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-gray-800 mb-4">Smart Insights</h3>
               <p className="text-gray-700">
-                AI-powered meal suggestions and shopping lists based on what you have and what's expiring.
+                AI-powered meal suggestions and shopping lists based on what you have and what&apos;s expiring.
               </p>
             </motion.div>
           </div>

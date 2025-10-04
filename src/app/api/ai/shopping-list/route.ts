@@ -7,7 +7,11 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
-    const { pantryItems, mealSuggestions, userPreferences } = await request.json();
+    const { pantryItems, mealSuggestions, userPreferences }: { 
+      pantryItems: Array<{ name: string; quantity: number; expires?: string }>; 
+      mealSuggestions: Array<{ name: string; ingredients: string[] }>; 
+      userPreferences?: string 
+    } = await request.json();
 
     if (!pantryItems || !Array.isArray(pantryItems)) {
       return NextResponse.json({ error: 'Invalid pantry items' }, { status: 400 });
@@ -16,8 +20,8 @@ export async function POST(request: NextRequest) {
     const prompt = `
 You are a smart pantry assistant. Based on the user's current pantry items and meal suggestions, generate a personalized shopping list.
 
-Current Pantry Items: ${pantryItems.map((item: any) => `${item.name} (${item.quantity})`).join(', ')}
-Meal Suggestions: ${mealSuggestions?.map((meal: any) => meal.name).join(', ') || 'None'}
+Current Pantry Items: ${pantryItems.map((item: { name: string; quantity: number }) => `${item.name} (${item.quantity})`).join(', ')}
+Meal Suggestions: ${mealSuggestions?.map((meal: { name: string }) => meal.name).join(', ') || 'None'}
 User Preferences: ${userPreferences || 'No specific preferences'}
 
 Please generate a shopping list that includes:
@@ -42,7 +46,7 @@ Return ONLY a JSON array of shopping list items, like: ["onions", "garlic", "oli
     if (response) {
       try {
         shoppingList = JSON.parse(response);
-      } catch (parseError) {
+      } catch {
         // Fallback: extract items from text response
         shoppingList = response.split('\n')
           .map(line => line.replace(/^[-•\s]+/, '').trim())

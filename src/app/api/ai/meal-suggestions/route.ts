@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
-    const { pantryItems, dietaryRestrictions } = await request.json();
+    const { pantryItems, dietaryRestrictions }: { pantryItems: Array<{ name: string; quantity: number }>; dietaryRestrictions?: string[] } = await request.json();
 
     if (!pantryItems || !Array.isArray(pantryItems)) {
       return NextResponse.json({ error: 'Invalid pantry items' }, { status: 400 });
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const prompt = `
 You are a culinary expert. Based on the user's pantry items, suggest 3 creative meal ideas.
 
-Available Ingredients: ${pantryItems.map((item: any) => item.name).join(', ')}
+Available Ingredients: ${pantryItems.map((item: { name: string }) => item.name).join(', ')}
 Dietary Restrictions: ${dietaryRestrictions?.join(', ') || 'None'}
 
 For each meal, provide:
@@ -46,7 +46,13 @@ Return as JSON array with this structure:
     });
 
     const response = completion.choices[0]?.message?.content;
-    let mealSuggestions: any[] = [];
+    let mealSuggestions: Array<{
+      name: string;
+      description: string;
+      ingredients: string[];
+      difficulty: string;
+      cookTime: string;
+    }> = [];
 
     if (response) {
       try {
