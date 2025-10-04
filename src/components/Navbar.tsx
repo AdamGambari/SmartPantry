@@ -10,7 +10,7 @@ interface NavbarProps {
   variant?: 'homepage' | 'app' | 'dashboard'
 }
 
-export default function Navbar({ variant = 'homepage' }: NavbarProps) {
+export default function Navbar({ }: NavbarProps) {
   const router = useRouter()
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const [loading, setLoading] = useState(true)

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import { Camera, Upload, X, Check } from 'lucide-react'
 
 interface ReceiptScannerProps {
@@ -46,7 +47,7 @@ export default function ReceiptScanner({ isOpen, onClose, onItemsExtracted }: Re
         
         const imageData = canvas.toDataURL('image/jpeg')
         setPreview(imageData)
-        processReceipt(imageData)
+        processReceipt()
       }
     }
   }
@@ -58,13 +59,13 @@ export default function ReceiptScanner({ isOpen, onClose, onItemsExtracted }: Re
       reader.onload = (e) => {
         const imageData = e.target?.result as string
         setPreview(imageData)
-        processReceipt(imageData)
+        processReceipt()
       }
       reader.readAsDataURL(file)
     }
   }
 
-  const processReceipt = async (_imageData: string) => {
+  const processReceipt = async () => {
     setIsProcessing(true)
     
     // mock OCR processing
@@ -183,9 +184,11 @@ export default function ReceiptScanner({ isOpen, onClose, onItemsExtracted }: Re
           {preview && (
             <div className="space-y-4">
               <div className="text-center">
-                <img
+                <Image
                   src={preview}
                   alt="Receipt preview"
+                  width={400}
+                  height={256}
                   className="max-w-full h-64 object-contain mx-auto rounded-lg border"
                 />
               </div>
